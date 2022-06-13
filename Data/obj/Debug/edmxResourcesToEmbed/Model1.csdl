@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SIC_NS_LOCALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Alarma">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ID_TipoDeAlarma" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TipoDeAlarma" Relationship="Self.FK_Alarma_TipoDeAlarma" FromRole="Alarma" ToRole="TipoDeAlarma" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="USERS" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_USERS_UserId" FromRole="AspNetUserClaims" ToRole="USERS" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="USERS" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_USERS_UserId" FromRole="AspNetUserLogins" ToRole="USERS" />
+  </EntityType>
+  <EntityType Name="Modulo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SubMenus" Relationship="SIC_NS_LOCALModel.FK_SubMenus_Modulo" FromRole="Modulo" ToRole="SubMenus" />
+  </EntityType>
+  <EntityType Name="PERMISSIONS">
+    <Key>
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="PermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdModulo" Type="Int64" />
+    <NavigationProperty Name="ROLES" Relationship="Self.LNK_ROLE_PERMISSION" FromRole="PERMISSIONS" ToRole="ROLES" />
+    <Property Name="IdSubMenu" Type="Int64" />
+    <NavigationProperty Name="SubMenus" Relationship="SIC_NS_LOCALModel.FK_PERMISSIONS_SubMenus" FromRole="PERMISSIONS" ToRole="SubMenus" />
+  </EntityType>
+  <EntityType Name="ROLES">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsSysAdmin" Type="Boolean" Nullable="false" />
+    <Property Name="RoleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PERMISSIONS" Relationship="Self.LNK_ROLE_PERMISSION" FromRole="ROLES" ToRole="PERMISSIONS" />
+    <NavigationProperty Name="USERS" Relationship="Self.LNK_USER_ROLE" FromRole="ROLES" ToRole="USERS" />
+  </EntityType>
+  <EntityType Name="Sitio">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="URL" Type="String" MaxLength="350" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdTipoSitio" Type="Int64" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IdUsuarioCreador" Type="Int64" Nullable="false" />
+    <Property Name="IdUsuarioCreadorHistorial" Type="Int64" Nullable="false" />
+    <Property Name="IdSubMenuPadre" Type="Int64" />
+    <Property Name="IdModulo" Type="Int64" />
+    <NavigationProperty Name="TipoSitio" Relationship="Self.FK_Sitio_TipoSitio" FromRole="Sitio" ToRole="TipoSitio" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TipoDeAlarma">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Alarma" Relationship="Self.FK_Alarma_TipoDeAlarma" FromRole="TipoDeAlarma" ToRole="Alarma" />
+  </EntityType>
+  <EntityType Name="TipoSitio">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IdUsuarioCreador" Type="Int64" Nullable="false" />
+    <Property Name="IdUsuarioCreadorHistorial" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Sitio" Relationship="Self.FK_Sitio_TipoSitio" FromRole="TipoSitio" ToRole="Sitio" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Inactive" Type="Boolean" Nullable="false" />
+    <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_USERS_UserId" FromRole="USERS" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_USERS_UserId" FromRole="USERS" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="ROLES" Relationship="Self.LNK_USER_ROLE" FromRole="USERS" ToRole="ROLES" />
+  </EntityType>
+  <EntityType Name="Contents">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Contents1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Alarma_TipoDeAlarma">
+    <End Role="TipoDeAlarma" Type="Self.TipoDeAlarma" Multiplicity="0..1" />
+    <End Role="Alarma" Type="Self.Alarma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDeAlarma">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Alarma">
+        <PropertyRef Name="ID_TipoDeAlarma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_USERS_UserId">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_USERS_UserId">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sitio_TipoSitio">
+    <End Role="TipoSitio" Type="Self.TipoSitio" Multiplicity="1" />
+    <End Role="Sitio" Type="Self.Sitio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoSitio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sitio">
+        <PropertyRef Name="IdTipoSitio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LNK_ROLE_PERMISSION">
+    <End Role="PERMISSIONS" Type="Self.PERMISSIONS" Multiplicity="*" />
+    <End Role="ROLES" Type="Self.ROLES" Multiplicity="*" />
+  </Association>
+  <Association Name="LNK_USER_ROLE">
+    <End Role="ROLES" Type="Self.ROLES" Multiplicity="*" />
+    <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="SIC_NS_LOCALEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Alarma" EntityType="Self.Alarma" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+    <EntitySet Name="Modulo" EntityType="Self.Modulo" />
+    <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSIONS" />
+    <EntitySet Name="ROLES" EntityType="Self.ROLES" />
+    <EntitySet Name="Sitio" EntityType="Self.Sitio" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TipoDeAlarma" EntityType="Self.TipoDeAlarma" />
+    <EntitySet Name="TipoSitio" EntityType="Self.TipoSitio" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" />
+    <EntitySet Name="Contents" EntityType="Self.Contents" />
+    <AssociationSet Name="FK_Alarma_TipoDeAlarma" Association="Self.FK_Alarma_TipoDeAlarma">
+      <End Role="TipoDeAlarma" EntitySet="TipoDeAlarma" />
+      <End Role="Alarma" EntitySet="Alarma" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_USERS_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_USERS_UserId">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_USERS_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_USERS_UserId">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sitio_TipoSitio" Association="Self.FK_Sitio_TipoSitio">
+      <End Role="TipoSitio" EntitySet="TipoSitio" />
+      <End Role="Sitio" EntitySet="Sitio" />
+    </AssociationSet>
+    <AssociationSet Name="LNK_ROLE_PERMISSION" Association="Self.LNK_ROLE_PERMISSION">
+      <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+      <End Role="ROLES" EntitySet="ROLES" />
+    </AssociationSet>
+    <AssociationSet Name="LNK_USER_ROLE" Association="Self.LNK_USER_ROLE">
+      <End Role="ROLES" EntitySet="ROLES" />
+      <End Role="USERS" EntitySet="USERS" />
+    </AssociationSet>
+    <EntitySet Name="SubMenus" EntityType="SIC_NS_LOCALModel.SubMenus" />
+    <AssociationSet Name="FK_SubMenus_Modulo" Association="SIC_NS_LOCALModel.FK_SubMenus_Modulo">
+      <End Role="Modulo" EntitySet="Modulo" />
+      <End Role="SubMenus" EntitySet="SubMenus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PERMISSIONS_SubMenus" Association="SIC_NS_LOCALModel.FK_PERMISSIONS_SubMenus">
+      <End Role="SubMenus" EntitySet="SubMenus" />
+      <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SubMenus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdModulo" Type="Int64" />
+    <NavigationProperty Name="Modulo" Relationship="SIC_NS_LOCALModel.FK_SubMenus_Modulo" FromRole="SubMenus" ToRole="Modulo" />
+    <NavigationProperty Name="PERMISSIONS" Relationship="SIC_NS_LOCALModel.FK_PERMISSIONS_SubMenus" FromRole="SubMenus" ToRole="PERMISSIONS" />
+  </EntityType>
+  <Association Name="FK_SubMenus_Modulo">
+    <End Type="SIC_NS_LOCALModel.Modulo" Role="Modulo" Multiplicity="0..1" />
+    <End Type="SIC_NS_LOCALModel.SubMenus" Role="SubMenus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modulo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubMenus">
+        <PropertyRef Name="IdModulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PERMISSIONS_SubMenus">
+    <End Type="SIC_NS_LOCALModel.SubMenus" Role="SubMenus" Multiplicity="0..1" />
+    <End Type="SIC_NS_LOCALModel.PERMISSIONS" Role="PERMISSIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubMenus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PERMISSIONS">
+        <PropertyRef Name="IdSubMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

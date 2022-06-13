@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SIC_NS_LOCALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Alarma">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+    <Property Name="ID_TipoDeAlarma" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SIC_NS_LOCAL.dbo.Contents' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Contents">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titulo" Type="nvarchar(max)" />
+    <Property Name="Descripcion" Type="nvarchar(max)" />
+    <Property Name="Contents" Type="nvarchar(max)" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="Url" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="LNK_ROLE_PERMISSION">
+    <Key>
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="PermissionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LNK_USER_ROLE">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Modulo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PERMISSIONS">
+    <Key>
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="PermissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PermissionDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdSubMenu" Type="bigint" />
+  </EntityType>
+  <EntityType Name="ROLES">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastModified" Type="datetime" Nullable="false" />
+    <Property Name="IsSysAdmin" Type="bit" Nullable="false" />
+    <Property Name="RoleDescription" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sitio">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="URL" Type="varchar" MaxLength="350" Nullable="false" />
+    <Property Name="IdTipoSitio" Type="bigint" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="250" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="FechaCreacion" Type="date" Nullable="false" />
+    <Property Name="IdUsuarioCreador" Type="bigint" Nullable="false" />
+    <Property Name="IdUsuarioCreadorHistorial" Type="bigint" Nullable="false" />
+    <Property Name="IdSubMenuPadre" Type="bigint" />
+    <Property Name="IdModulo" Type="bigint" />
+  </EntityType>
+  <EntityType Name="SubMenus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdModulo" Type="bigint" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TipoDeAlarma">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TipoSitio">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="250" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="FechaCreacion" Type="date" Nullable="false" />
+    <Property Name="IdUsuarioCreador" Type="bigint" Nullable="false" />
+    <Property Name="IdUsuarioCreadorHistorial" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastModified" Type="datetime" Nullable="false" />
+    <Property Name="Inactive" Type="bit" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar(max)" />
+    <Property Name="Lastname" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Alarma_TipoDeAlarma">
+    <End Role="TipoDeAlarma" Type="Self.TipoDeAlarma" Multiplicity="0..1" />
+    <End Role="Alarma" Type="Self.Alarma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDeAlarma">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Alarma">
+        <PropertyRef Name="ID_TipoDeAlarma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_USERS_UserId">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_USERS_UserId">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LNK_ROLE_PERMISSION_dbo_PERMISSIONS_PermissionId">
+    <End Role="PERMISSIONS" Type="Self.PERMISSIONS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LNK_ROLE_PERMISSION" Type="Self.LNK_ROLE_PERMISSION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERMISSIONS">
+        <PropertyRef Name="PermissionId" />
+      </Principal>
+      <Dependent Role="LNK_ROLE_PERMISSION">
+        <PropertyRef Name="PermissionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LNK_ROLE_PERMISSION_dbo_ROLES_RoleId">
+    <End Role="ROLES" Type="Self.ROLES" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LNK_ROLE_PERMISSION" Type="Self.LNK_ROLE_PERMISSION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLES">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="LNK_ROLE_PERMISSION">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LNK_USER_ROLE_dbo_ROLES_RoleId">
+    <End Role="ROLES" Type="Self.ROLES" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LNK_USER_ROLE" Type="Self.LNK_USER_ROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLES">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="LNK_USER_ROLE">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LNK_USER_ROLE_dbo_USERS_UserId">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LNK_USER_ROLE" Type="Self.LNK_USER_ROLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="LNK_USER_ROLE">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PERMISSIONS_SubMenus">
+    <End Role="SubMenus" Type="Self.SubMenus" Multiplicity="0..1" />
+    <End Role="PERMISSIONS" Type="Self.PERMISSIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubMenus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PERMISSIONS">
+        <PropertyRef Name="IdSubMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sitio_TipoSitio">
+    <End Role="TipoSitio" Type="Self.TipoSitio" Multiplicity="1" />
+    <End Role="Sitio" Type="Self.Sitio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoSitio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sitio">
+        <PropertyRef Name="IdTipoSitio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubMenus_Modulo">
+    <End Role="Modulo" Type="Self.Modulo" Multiplicity="0..1" />
+    <End Role="SubMenus" Type="Self.SubMenus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modulo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubMenus">
+        <PropertyRef Name="IdModulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SIC_NS_LOCALModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Alarma" EntityType="Self.Alarma" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LNK_ROLE_PERMISSION" EntityType="Self.LNK_ROLE_PERMISSION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LNK_USER_ROLE" EntityType="Self.LNK_USER_ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSIONS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sitio" EntityType="Self.Sitio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubMenus" EntityType="Self.SubMenus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoDeAlarma" EntityType="Self.TipoDeAlarma" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoSitio" EntityType="Self.TipoSitio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contents" EntityType="Self.Contents" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Contents].[ID] AS [ID], 
+    [Contents].[Titulo] AS [Titulo], 
+    [Contents].[Descripcion] AS [Descripcion], 
+    [Contents].[Contents] AS [Contents], 
+    [Contents].[Image] AS [Image], 
+    [Contents].[Url] AS [Url]
+    FROM [dbo].[Contents] AS [Contents]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Alarma_TipoDeAlarma" Association="Self.FK_Alarma_TipoDeAlarma">
+      <End Role="TipoDeAlarma" EntitySet="TipoDeAlarma" />
+      <End Role="Alarma" EntitySet="Alarma" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_USERS_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_USERS_UserId">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_USERS_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_USERS_UserId">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LNK_ROLE_PERMISSION_dbo_PERMISSIONS_PermissionId" Association="Self.FK_dbo_LNK_ROLE_PERMISSION_dbo_PERMISSIONS_PermissionId">
+      <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+      <End Role="LNK_ROLE_PERMISSION" EntitySet="LNK_ROLE_PERMISSION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LNK_ROLE_PERMISSION_dbo_ROLES_RoleId" Association="Self.FK_dbo_LNK_ROLE_PERMISSION_dbo_ROLES_RoleId">
+      <End Role="ROLES" EntitySet="ROLES" />
+      <End Role="LNK_ROLE_PERMISSION" EntitySet="LNK_ROLE_PERMISSION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LNK_USER_ROLE_dbo_ROLES_RoleId" Association="Self.FK_dbo_LNK_USER_ROLE_dbo_ROLES_RoleId">
+      <End Role="ROLES" EntitySet="ROLES" />
+      <End Role="LNK_USER_ROLE" EntitySet="LNK_USER_ROLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LNK_USER_ROLE_dbo_USERS_UserId" Association="Self.FK_dbo_LNK_USER_ROLE_dbo_USERS_UserId">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="LNK_USER_ROLE" EntitySet="LNK_USER_ROLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PERMISSIONS_SubMenus" Association="Self.FK_PERMISSIONS_SubMenus">
+      <End Role="SubMenus" EntitySet="SubMenus" />
+      <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sitio_TipoSitio" Association="Self.FK_Sitio_TipoSitio">
+      <End Role="TipoSitio" EntitySet="TipoSitio" />
+      <End Role="Sitio" EntitySet="Sitio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubMenus_Modulo" Association="Self.FK_SubMenus_Modulo">
+      <End Role="Modulo" EntitySet="Modulo" />
+      <End Role="SubMenus" EntitySet="SubMenus" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

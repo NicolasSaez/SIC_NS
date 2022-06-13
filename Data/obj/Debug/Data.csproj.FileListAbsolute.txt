@@ -1,0 +1,9 @@
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\bin\Debug\Data.dll.config
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\bin\Debug\Data.dll
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\bin\Debug\Data.pdb
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\bin\Debug\EntityFramework.dll
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\obj\Debug\Data.csproj.CopyComplete
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\obj\Debug\Data.dll
+C:\Users\saezn\OneDrive\Desktop\proyects\Data\obj\Debug\Data.pdb

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "20pJhz6BQEQjhea8OHm41y9CScgI+C03wt8vTKUBGpZ7cnc80EYoZOUDYceQqZSI0Bn/i/FLSbjXKdMACCN5yQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\saezn\\OneDrive\\Desktop\\proyects\\Data\\Data.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\saezn\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
